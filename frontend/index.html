@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <p>target</p>
+        <input type="text" id="targetInput" />
+        <p>monthly income</p>
+        <input type="text" id="monthlyIncomeInput" />
+        <p>monthly spending</p>
+        <input type="text" id="monthlySpendingInput" />
+        <p>current saving</p>
+        <input type="text" id="curSavingInput" />
+        <br><br>
+        <button id="submit">SUBMIT</button>
+    </form>
+    <div id="result"></div>
+    <script>
+
+        const baseUrl = 'http://localhost:8383'
+
+        const submitBtn = document.getElementById('submit')
+        const targetInput = document.getElementById('targetInput')
+        const monthlyIncomeInput = document.getElementById('monthlyIncomeInput')
+        const monthlySpendingInput = document.getElementById('monthlySpendingInput')
+        const curSavingInput = document.getElementById('curSavingInput')
+
+        const result = document.getElementById('result');
+
+        submitBtn.addEventListener('click', submitInfo)
+        async function submitInfo() {
+            event.preventDefault(); // to prevent default action so can define own event behavior
+            const response = await fetch(baseUrl,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        target: targetInput.value,
+                        monthlyIncome: monthlyIncomeInput.value,
+                        monthlySpending: monthlySpendingInput.value,
+                        curSaving: curSavingInput.value
+                    })
+                })
+            const data = await response.json();
+            result.textContent = `You will need ${data.timeNeeded} more month(s) to save up to your target of ${data.target}. Remaining amount to save up is $ ${data.remaining}. `;
+        }
+    </script>
+</body>
+
+</html>
