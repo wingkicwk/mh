@@ -47,7 +47,6 @@
 
         const result = document.getElementById('result');
 
-
         submitBtn.addEventListener('click', (event) => {
             event.preventDefault(); // to prevent default action so can define own event behavior
 
@@ -88,7 +87,6 @@
             } else return true;
         }
 
-
         function isAllInputsValid() {
             let isValid = true;
             const inputs = [targetInput, monthlyIncomeInput, monthlySpendingInput, curSavingInput];
@@ -98,8 +96,7 @@
                 const error = errors[i];
                 if (!isInputValid(input, error)) isValid = false;
             }
-            // run isInputValid for all inputs before returning, so the error messages for all invalid inputs 
-            //will be displayed at once
+            // run isInputValid for all inputs before returning, so the error messages for all invalid inputs will be displayed at once
             return isValid;
         }
 
