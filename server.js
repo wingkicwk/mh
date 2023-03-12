@@ -36,8 +36,9 @@ app.post('/api/savings', async (req, res) => {
 //Api to count how many days to the next public holiday
 app.get('/api/showCalendar', async function(req, res){
     try {
-        const t = await getHoliday();
-        console.log(t);
+        // const t = await getHoliday();
+        // console.log(t);
+        const t = filterCurrentYearHoliday()
         res.send(t);
     } catch (error) {
         console.log(error);
@@ -63,8 +64,18 @@ async function getHoliday(){
 }
 
 //filter the holidays to get only current year holiday
-function filterCurrentYearHoliday(){
-    const holidays = getHoliday();
+async function filterCurrentYearHoliday(){
+    const holidays = await getHoliday();
+   
+    var holidaysAndDate = [];
+    for(var i in holidays){
+        var singleItem = holidays[i];
+        holidaysAndDate.push({ 
+            "summary" : singleItem.summary,
+            "time"  : singleItem.start.date,
+        });
+    }
+    
     const currentYear = new Date().getFullYear()  // returns the current year
 }
 
