@@ -66,17 +66,27 @@ async function getHoliday(){
 //filter the holidays to get only current year holiday
 async function filterCurrentYearHoliday(){
     const holidays = await getHoliday();
+    const currentYear = new Date().getFullYear()  // returns the current year
    
-    var holidaysAndDate = [];
+    var holidaysAndDate = [];   //filter the result to make it only contains holiday name and time
     for(var i in holidays){
         var singleItem = holidays[i];
-        holidaysAndDate.push({ 
-            "summary" : singleItem.summary,
-            "time"  : singleItem.start.date,
-        });
+        var summay = singleItem.summary;
+        var time = singleItem.start.date;
+        var timeToCompare = time.split('-')[0];
+
+        if(timeToCompare == currentYear){
+            holidaysAndDate.push({ 
+                "summary" : summay,
+                "time"  : time,
+            });
+            if(summay == "New Year's Eve"){
+                break;
+            }
+        }
     }
-    
-    const currentYear = new Date().getFullYear()  // returns the current year
+    return holidaysAndDate
+    // console.log(holidaysAndDate)
 }
 
 
