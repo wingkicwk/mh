@@ -73,11 +73,12 @@
                 errorMessage = "Please enter a valid currency amount."
             } else if (dataType === 'currency' && parseFloat(value.replace(/,/g, '')) <= 0) {
                 errorMessage = "Please enter an amount greater than zero."
-            } else if (dataType === 'monthlyIncome' && parseFloat(value.replace(/,/g, '')) <= parseFloat(monthlySpendingInput.value.replace(/,/g, ''))) {
+            } else if (input == monthlyIncomeInput && parseFloat(value.replace(/,/g, '')) <= parseFloat(monthlySpendingInput.value.replace(/,/g, ''))) {
                 errorMessage = "Monthly income must be greater than monthly spending."
-            } else if (dataType === 'monthlySpending' && parseFloat(value.replace(/,/g, '')) >= parseFloat(monthlyIncomeInput.value.replace(/,/g, ''))) {
+            } else if (input == monthlySpendingInput && parseFloat(value.replace(/,/g, '')) >= parseFloat(monthlyIncomeInput.value.replace(/,/g, ''))) {
                 errorMessage = "Monthly spending must be less than monthly income."
             }
+
             if (errorMessage.length > 0) {
                 error.textContent = errorMessage
                 error.style.color = 'red';
