@@ -2,28 +2,26 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.static('frontend'))
+
 // Middleware to parse JSON request body
 app.use(express.json());
 
-app.get('/', function (req, res) {
-    res.send("hello world!");
-})
 // Define API endpoint
-app.post('/api/savings', async (req, res) => {
+app.post('/', async (req, res) => {
     try {
-
         // Extract user input from request body
-        const { target, monthlyIncome, mothlySpending, curSaving } = req.body;
+        const { target, monthlyIncome, monthlySpending, curSaving } = req.body;
 
         //calculae time needed to save up
-        const mothlyNetSaving = monthlyIncome - mothlySpending;
+        const monthlyNetSaving = monthlyIncome - monthlySpending;
         const remaining = target - curSaving;
-        const timeNeeded = (target - curSaving) / mothlyNetSaving;
+        const timeNeeded = remaining / monthlyNetSaving;
 
         // Return response as JSON
         res.status(200).json({
             timeNeeded,
-            mothlyNetSaving,
+            target,
             remaining
         })
     } catch (error) {
