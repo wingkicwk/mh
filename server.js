@@ -13,7 +13,7 @@ app.post('/api/savings', async (req, res) => {
     // Extract user input from request body
     const { target, monthlyIncome, monthlySpending, curSaving } = req.body
 
-    //calculae time needed to save up
+    // calculae time needed to save up
     const monthlyNetSaving = monthlyIncome - monthlySpending
     const remaining = target - curSaving
     const timeNeeded = remaining / monthlyNetSaving
