@@ -33,7 +33,6 @@ app.post('/api/savings', async (req, res) => {
 
 //Api to count how many days to the next public holiday
 app.get('/api/showCalendar', async function(req, res){
-// app.get('/', async function(req, res){
     try {
         const t = await calculateDateToNextHoliday()
         console.log(t);
@@ -61,20 +60,20 @@ async function getHoliday(){
     return holidays;
 }
 
-//filter the holidays to get only current year holiday
+//filter the holidays to get only current year holidays with only holiday time and name information
 async function filterCurrentYearHoliday(){
     const holidays = await getHoliday();
     const currentYear = new Date().getFullYear()  // returns the current year
    
-    var holidaysAndDate = [];   //filter the result to make it only contains holiday name and time
+    var holidaysAndDate = [];   
     for(var i in holidays){
         var singleItem = holidays[i];
         var summay = singleItem.summary;
         var time = singleItem.start.date;
         var timeToCompare = time.split('-')[0];
 
-        if(timeToCompare == currentYear){
-            holidaysAndDate.push({ 
+        if(timeToCompare == currentYear){ //add holidays only within current year
+            holidaysAndDate.push({   //if the holidays are current years', add the name and time into the result
                 "summary" : summay,
                 "time"  : time,
             });
@@ -98,12 +97,12 @@ async function calculateDateToNextHoliday(){
         var singleHolidayTime = singleHoliday.time;
         var dateNumber = 0;
 
-        const d1 = Date.parse(currentDate);
-        const d2 = Date.parse(singleHolidayTime);
-        const d3 = Date.parse(holidays[i-1].time)
+        const currentDateParse = Date.parse(currentDate);
+        const singleHolidayTimeParse = Date.parse(singleHolidayTime);
+        const preHolidayParse = Date.parse(holidays[i-1].time)
 
-        if(d2 == d1 || (d2>d1 && d3 < d1)){
-            dateNumber = (d2 - d1)/(1000 * 3600 * 24);
+        if(singleHolidayTimeParse == currentDateParse || (singleHolidayTimeParse>currentDateParse && preHolidayParse < currentDateParse)){
+            dateNumber = (singleHolidayTimeParse - currentDateParse)/(1000 * 3600 * 24);
             res.push({
                 "summary" : singleHoliday.summary,
                 "time"  : singleHoliday.time,
