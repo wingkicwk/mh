@@ -33,7 +33,7 @@ submitBtn.addEventListener('click', (event) => {
 
 
 function submitData(data) {
-    fetch(baseUrl, {
+    fetch(baseUrl + "/api/savings", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

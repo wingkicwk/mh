@@ -8,7 +8,7 @@ app.use(express.static('frontend'))
 app.use(express.json());
 
 // Define API endpoint
-app.post('/', async (req, res) => {
+app.post('/api/savings', async (req, res) => {
     try {
         // Extract user input from request body
         const { target, monthlyIncome, monthlySpending, curSaving } = req.body;
