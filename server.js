@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.static('frontend'));
 // Middleware to parse JSON request body
-// app.use(express.json());
+app.use(express.json());
 
 // Define API endpoint
 app.post('/api/savings', async (req, res) => {

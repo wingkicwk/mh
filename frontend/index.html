@@ -12,9 +12,10 @@
     <div id="holidayResult"></div>
     <script type="text/javascript">
         const result = document.getElementById('holidayResult');
+        const baseUrl = 'http://127.0.0.1:8383';
         document.addEventListener("DOMContentLoaded", function (event) {
-          const baseUrl = 'http://127.0.0.1:8383/api/showCalendar';
-          fetch(baseUrl, {
+          const holidayUrl = `${baseUrl}/api/showCalendar`;
+          fetch(holidayUrl, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
