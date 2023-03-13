@@ -2,12 +2,10 @@ const express = require('express');
 
 const app = express();
 
+app.use(express.static('frontend'));
 // Middleware to parse JSON request body
-app.use(express.json());
+// app.use(express.json());
 
-app.get('/', function (req, res) {
-    res.send("hello world!");
-})
 // Define API endpoint
 app.post('/api/savings', async (req, res) => {
     try {
@@ -35,6 +33,7 @@ app.post('/api/savings', async (req, res) => {
 
 //Api to count how many days to the next public holiday
 app.get('/api/showCalendar', async function(req, res){
+// app.get('/', async function(req, res){
     try {
         const t = await calculateDateToNextHoliday()
         console.log(t);
@@ -84,8 +83,7 @@ async function filterCurrentYearHoliday(){
             }
         }
     }
-    return holidaysAndDate
-    // console.log(holidaysAndDate)
+    return holidaysAndDate;
 }
 
 

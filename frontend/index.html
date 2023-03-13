@@ -1,0 +1,61 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Get Holiday Data</title>
+  </head>
+  <body>
+    <h1>Next Holiday</h1>
+    <div id="holiday-data"></div>
+    
+    <script>
+      async function getHolidayData() {
+        try {
+          const response = await fetch('/');
+          const data = await response.json();
+          document.getElementById('holiday-data').innerHTML = JSON.stringify(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      
+      getHolidayData();
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday</title>
+</head>
+
+<body>
+    <div id="holidayResult"></div>
+    <script type="text/javascript">
+        const result = document.getElementById('holidayResult');
+        document.addEventListener("DOMContentLoaded", function (event) {
+          const baseUrl = 'http://127.0.0.1:8383/api/showCalendar';
+          fetch(baseUrl, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if(data[0].date > 0){
+                holidayResult.textContent = `Till next holiday ${data[0].summary} is ${data[0].date} days left`;
+            }else{
+                holidayResult.textContent = `Today is ${data[0].summary}`;
+            }
+          })
+          .catch(error => console.error('Error:', error));
+        });
+      </script>
+</body>
+</html>
