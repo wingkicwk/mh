@@ -1,5 +1,4 @@
-
-const result = document.getElementById('holidayResult');
+const holidayResult = document.getElementById('holidayResult');
 const baseUrl = 'http://127.0.0.1:8383';
 document.addEventListener("DOMContentLoaded", function (event) {
     const holidayUrl = `${baseUrl}/api/showCalendar`;
