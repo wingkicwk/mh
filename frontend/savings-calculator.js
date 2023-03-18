@@ -1,3 +1,5 @@
+import { isAllInputsValid, clearResultAndError } from './form-validation.js'
+
 const baseUrl = 'http://localhost:8383'
 
 const submitBtn = document.getElementById('submit')
@@ -5,11 +7,6 @@ const targetInput = document.getElementById('targetInput')
 const monthlyIncomeInput = document.getElementById('monthlyIncomeInput')
 const monthlySpendingInput = document.getElementById('monthlySpendingInput')
 const curSavingInput = document.getElementById('curSavingInput')
-
-const targetError = document.getElementById('targetError')
-const monthlyIncomeError = document.getElementById('monthlyIncomeError')
-const monthlySpendingError = document.getElementById('monthlySpendingError')
-const curSavingError = document.getElementById('curSavingError')
 
 const result = document.getElementById('result')
 

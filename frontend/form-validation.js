@@ -1,3 +1,8 @@
+const targetError = document.getElementById('targetError')
+const monthlyIncomeError = document.getElementById('monthlyIncomeError')
+const monthlySpendingError = document.getElementById('monthlySpendingError')
+const curSavingError = document.getElementById('curSavingError')
+
 function isInputValid (input, error) {
   const value = input.value.trim()
   const dataType = input.getAttribute('data-type')
@@ -13,13 +18,13 @@ function isInputValid (input, error) {
   ) {
     errorMessage = 'Please enter an amount greater than zero.'
   } else if (
-    input == monthlyIncomeInput &&
+    input === monthlyIncomeInput &&
     parseFloat(value.replace(/,/g, '')) <=
       parseFloat(monthlySpendingInput.value.replace(/,/g, ''))
   ) {
     errorMessage = 'Monthly income must be greater than monthly spending.'
   } else if (
-    input == monthlySpendingInput &&
+    input === monthlySpendingInput &&
     parseFloat(value.replace(/,/g, '')) >=
       parseFloat(monthlyIncomeInput.value.replace(/,/g, ''))
   ) {
@@ -65,3 +70,5 @@ function clearResultAndError () {
   curSavingError.textContent = ''
   monthlySpendingError.textContent = ''
 }
+
+export { isAllInputsValid, clearResultAndError }
