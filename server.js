@@ -70,12 +70,12 @@ async function filterCurrentYearHoliday () {
     const time = singleItem.start.date
     const timeToCompare = time.split('-')[0]
 
-    if (timeToCompare == currentYear) { // add holidays only within current year
+    if (timeToCompare === currentYear) { // add holidays only within current year
       holidaysAndDate.push({ // if the holidays are current years', add the name and time into the result
         summary: summay,
         time
       })
-      if (summay == "New Year's Eve") {
+      if (summay === "New Year's Eve") {
         break
       }
     }
@@ -98,7 +98,7 @@ async function calculateDateToNextHoliday () {
     const singleHolidayTimeParse = Date.parse(singleHolidayTime)
     const preHolidayParse = Date.parse(holidays[i - 1].time)
 
-    if (singleHolidayTimeParse == currentDateParse || (singleHolidayTimeParse > currentDateParse && preHolidayParse < currentDateParse)) {
+    if (singleHolidayTimeParse === currentDateParse || (singleHolidayTimeParse > currentDateParse && preHolidayParse < currentDateParse)) {
       dateNumber = (singleHolidayTimeParse - currentDateParse) / (1000 * 3600 * 24)
       res.push({
         summary: singleHoliday.summary,
