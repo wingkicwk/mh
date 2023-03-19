@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express')
 
 const app = express()
@@ -6,6 +7,7 @@ app.use(express.static('frontend'))
 
 // Middleware to parse JSON request body
 app.use(express.json())
+const API_KEY = process.env.Google_API_KEY
 
 // Define API endpoint
 app.post('/api/savings', async (req, res) => {
@@ -47,11 +49,13 @@ async function getHoliday () {
   const BASE_CALENDAR_URL = 'https://www.googleapis.com/calendar/v3/calendars'
   const BASE_CALENDAR_ID_FOR_PUBLIC_HOLIDAY =
       'holiday@group.v.calendar.google.com' // Calendar Id. This is public but apparently not documented anywhere officialy.
-  const API_KEY = 'AIzaSyBg0IiUjXv79hXM_V5aYxKAd6erKPPYvCU'
+  // const API_KEY = 'AIzaSyBg0IiUjXv79hXM_V5aYxKAd6erKPPYvCU'
+  
   const CALENDAR_REGION = 'en.irish' // This variable refers to region whose holidays do we need to fetch
 
   const url = `${BASE_CALENDAR_URL}/${CALENDAR_REGION}%23${BASE_CALENDAR_ID_FOR_PUBLIC_HOLIDAY}/events?key=${API_KEY}`
 
+  // console.log(url)
   const response = await fetch(url)
   const data = await response.json()
   const holidays = data.items
