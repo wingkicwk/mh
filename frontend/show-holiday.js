@@ -1,5 +1,5 @@
 const holidayResult = document.getElementById('holidayResult');
-// const baseUrl1 = 'http://127.0.0.1:8383';
+// const baseUrl = 'http://127.0.0.1:8383';  leave the baseUrl as a backup
 document.addEventListener("DOMContentLoaded", function (event) {
     const holidayUrl = `${baseUrl}/api/showCalendar`;
     fetch(holidayUrl, {

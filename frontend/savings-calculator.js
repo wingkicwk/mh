@@ -1,6 +1,3 @@
-
-
-
 const submitBtn = document.getElementById('submit')
 const targetInput = document.getElementById('targetInput')
 const monthlyIncomeInput = document.getElementById('monthlyIncomeInput')
